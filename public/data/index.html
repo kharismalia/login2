@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="insert">
+        <label for="">nama barang</label>
+        <input name="nama" type="text">
+        <label for="">harga</label>
+        <input name="harga" type="text">
+        <label for=""></label>
+        <label>
+            Foto
+          </label>
+          <input type="file" name="photo" />
+          <button>Simpan</button>
+    </form>
+
+</body>
+</html>
+
+<script>
+    document.insert.onsubmit = async (e) => {
+      e.preventDefault();
+      const data = new FormData();
+      data.append("nama", document.insert.nama.value);
+      data.append("harga", document.insert.harga.value);
+      data.append("foto", document.insert.photo.files[0]);
+      await fetch("/api/data", {
+        method: "POST",
+        headers: {
+        },
+        body: data,
+      });
+      alert("Data Berhasil Ditambahkan.");
+      location.href="/tampil";
+    };
+  </script>
